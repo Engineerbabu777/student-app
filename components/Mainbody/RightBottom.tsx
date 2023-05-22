@@ -29,7 +29,7 @@ import { Types } from 'mongoose';
 const RightBottom = () => {
 
     const {data:session} = useSession();
-    const deleteStudent = useFetch(session?.user?.id as string|undefined , false);
+    const deleteStudent = useFetch(session?.user?.id as string|undefined);
     const [checked , setchecked] = useState(false);
     const [studentStateOn,setStudentState] = useRecoilState(studentState);
     
