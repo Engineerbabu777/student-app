@@ -51,7 +51,7 @@ const useFetch = async(userID:string|undefined, query:boolean ) => {
 
         }
 
-  // FUNCTION TO GET SEARCH USERS!
+  // FUNCTION TO GET FILTERED USERS!
      const getStudentsFiltered = () => { }
 
   // HANDLE DELETE!
