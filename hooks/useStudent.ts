@@ -29,7 +29,7 @@ const useFetch = async(userID:string|undefined, query:boolean ) => {
             setStudentState((prev)=> ({...prev,loading:true}))
 
             try{
-                await axios.get('/api/student?userId='+query)
+                await axios.get('/api/student?userId=`${session.user.id}`&query='+query)
                  .then(({data})=> {
                     setStudentState(prev => ({...prev, initialStateStudents:data.studentDocuments}));
                     setStudentState((prev) => ({...prev , students:data.studentDocuments,enrolledStudents: data.studentDocuments.length}));
