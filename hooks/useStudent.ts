@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Types } from 'mongoose';
 
 
-const useFetch = async(userID:string|undefined, query:boolean ) => {
+const useFetch = async(userID:string|undefined) => {
   
   const [studentStateOn,setStudentState] = useRecoilState(studentState);
 
@@ -29,7 +29,7 @@ const useFetch = async(userID:string|undefined, query:boolean ) => {
             setStudentState((prev)=> ({...prev,loading:true}))
 
             try{
-                await axios.get('/api/student?userId=`${session.user.id}`&query='+query)
+                await axios.get('/api/student?userId=+userID)
                  .then(({data})=> {
                     setStudentState(prev => ({...prev, initialStateStudents:data.studentDocuments}));
                     setStudentState((prev) => ({...prev , students:data.studentDocuments,enrolledStudents: data.studentDocuments.length}));
