@@ -4,14 +4,14 @@ import {atom} from 'recoil';
 import {StudentInterface} from '@/models/Student';
 
 // CREATING INTERFACE! 😍
-interface StudentTypes {
+export interface StudentTypes {
     students: [StudentInterface] | [];
     Query: Boolean;
     loading: Boolean;
     enrolledStudents: React.ReactNode;
     editGroups: [String] | [];
     initialStateStudents:  [StudentInterface] | [];
-    
+    filterGroups: [string]| []
 } 
 
 //---------------------------------------
@@ -23,6 +23,7 @@ const defaultState:StudentTypes = {
       enrolledStudents: 0,
       editGroups: [],
       initialStateStudents:[],
+      filterGroups: [],
      
 } 
 

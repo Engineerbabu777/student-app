@@ -6,6 +6,10 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import axios from 'axios';
 import {useRecoilState} from 'recoil';
 import {studentState} from '@/recoil/studentatom';
+import { PaginationAtom } from '@/recoil/paginationatom';
+import {toast} from 'react-hot-toast';
+import {useSession} from 'next-auth/react';
+import useFetch from '@/hooks/useStudent';
 
 interface Props {
 
@@ -13,11 +17,27 @@ interface Props {
 
 const SearchStudent = (props: Props) => {
 
-  // const [query, setQuery] = useState('');
   const [studentStateOn,setStudentState] = useRecoilState(studentState);
+  const [pagination , setPagination] = useRecoilState(PaginationAtom);
+  const {data:session} = useSession();
+  const Student = useFetch(session?.user?.id as string|undefined);
+
   const [query, setQuery] = useState('');
 
-  
+
+  const getAllUsers = async() => {
+    const {getStudents} = await Student;
+    getStudents();
+  }
+
+  useEffect(()=> {
+     // MAKE A REQUEST AND SET ALL TO INITIALSTATE!
+     if(session?.user?.id){
+       getAllUsers();
+     }
+
+  },[!query]);
+
   // LIVE SEARCH FILTER WITH EACH CHANGE ON INPUT...
   const handleInputChange = ():void => {
      
@@ -25,24 +45,25 @@ const SearchStudent = (props: Props) => {
   
       const handleChange = async() =>{
 
-        setStudentState((prev=> ({...prev,loading:true,Query:false})))
-    
+        setStudentState((prev=> ({...prev,loading:true,Query:false})));
+        setPagination((prev) => ({...prev, loadingState:true}));
         
-        if(!query){
-  
-          setStudentState((prev=> ({...prev,loading:false,Query:true,students:studentStateOn.initialStateStudents})))
-          return;
-        
-        } else{
           
           await axios.get('/api/student?userId=12&query='+query)
           .then(({data}) => {
             
             setStudentState((prev=> ({...prev,students:data.studentSearch,loading:false})));
+
+            // SETTING LENGHT FOR BUTTONS!
+            setPagination((prev) => ({...prev,numberOfButtons:Math.ceil(data.studentSearch.length/5)}));
+            // BUTTONS CREATOR! // AND CHECKS IF NUMBERS OF STUDENTS GREATER THAN 0
+            setPagination((prev) => ({...prev,buttonsDisplayer: Array.from({ length:Math.ceil(data.studentSearch.length/5)}, (_, index) => index + 1) })) 
+            
+            setPagination((prev) => ({...prev , paginatedData:data.studentSearch.slice((pagination.currentPage-1)*5,(pagination.currentPage-1)*5+pagination.perPageList)}))
+            setPagination((prev) => ({...prev,loadingState:false}));
+
     
            })
-    
-          }
     
       }
       
@@ -58,14 +79,6 @@ const SearchStudent = (props: Props) => {
     handleInputChange();
 
   },[query]);
-
-  
-
-
-
-
-
-
 
 
     return (
