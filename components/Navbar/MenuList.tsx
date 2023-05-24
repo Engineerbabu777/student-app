@@ -12,6 +12,7 @@ import {
 import {useRouter} from 'next/router';
 import Image from 'next/image';
 import {RiLogoutCircleRLine} from 'react-icons/ri';
+import {toast} from 'react-hot-toast';
 
 interface Props {
     
@@ -24,7 +25,7 @@ const MenuListItems = (props: Props) => {
 
     return (
         <>
-          <MenuItem  >
+          <MenuItem  onClick={()=> toast.success(`Modal With Current-User Details!`)}>
 
           {/* PROFILE-ICON */}
           <Image src={`${session?.user?.image}`} alt={'user'} width={18} height={18} />
@@ -41,9 +42,9 @@ const MenuListItems = (props: Props) => {
 
           <MenuDivider />
 
-          <MenuItem bg={'#47A992'} >
+          <MenuItem bg={'#47A992'} onClick={()=> toast.success(`Modal With Developer Details!`)} >
             {/* MODAL TO SHOW DEVELOPER INFO */}
-          <Text fontWeight={'semibold'} color={'white'} px={8}>⚙️ Engineer Babu 👼</Text>
+          <Text fontWeight={'semibold'} color={'white'} px={8} >⚙️ Engineer Babu 👼</Text>
           </MenuItem>
         </>
     )

@@ -8,7 +8,7 @@ import { JWT } from "next-auth/jwt";
 export  const authOptions = {
     providers: [
         
-        // OAuth authentication providers...
+      
         GoogleProvider({
           clientId: "758472497071-hkdv1q0hnq7jtuml5fkvkan61ujek9ug.apps.googleusercontent.com",
           clientSecret: "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",

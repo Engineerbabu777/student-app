@@ -24,7 +24,7 @@ const SearchStudent = (props: Props) => {
 
   const [query, setQuery] = useState('');
 
-
+// FUNCTION FROM HOOK!
   const getAllUsers = async() => {
     const {getStudents} = await Student;
     getStudents();
@@ -52,14 +52,14 @@ const SearchStudent = (props: Props) => {
           await axios.get('/api/student?userId=12&query='+query)
           .then(({data}) => {
             
-            setStudentState((prev=> ({...prev,students:data.studentSearch,loading:false})));
+            setStudentState((prev=> ({...prev,students:data?.studentSearch,loading:false})));
 
             // SETTING LENGHT FOR BUTTONS!
-            setPagination((prev) => ({...prev,numberOfButtons:Math.ceil(data.studentSearch.length/5)}));
+            setPagination((prev) => ({...prev,numberOfButtons:Math.ceil(data?.studentSearch?.length/5)}));
             // BUTTONS CREATOR! // AND CHECKS IF NUMBERS OF STUDENTS GREATER THAN 0
-            setPagination((prev) => ({...prev,buttonsDisplayer: Array.from({ length:Math.ceil(data.studentSearch.length/5)}, (_, index) => index + 1) })) 
+            setPagination((prev) => ({...prev,buttonsDisplayer: Array.from({ length:Math.ceil(data?.studentSearch?.length/5)}, (_, index) => index + 1) })) 
             
-            setPagination((prev) => ({...prev , paginatedData:data.studentSearch.slice((pagination.currentPage-1)*5,(pagination.currentPage-1)*5+pagination.perPageList)}))
+            setPagination((prev) => ({...prev , paginatedData:data?.studentSearch?.slice((pagination?.currentPage-1)*5,(pagination?.currentPage-1)*5+pagination?.perPageList)}))
             setPagination((prev) => ({...prev,loadingState:false}));
 
     

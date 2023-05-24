@@ -10,7 +10,7 @@ export interface StudentInterface {
     DOB: Date,
     city: String,
     image:String;
-    groups: [String];
+    groups: String[];
     _v:Number;
 }
 

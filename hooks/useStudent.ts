@@ -31,19 +31,23 @@ const useFetch = async(userID:string|undefined) => {
                 await axios.get('/api/student?userId='+userID)
                  .then(({data})=> {
                   //  setPagination((prev) => ({...prev,loading:false}))
-                    setStudentState(prev => ({...prev, initialStateStudents:data.studentDocuments}));
-                    setStudentState((prev) => ({...prev , students:data.studentDocuments,enrolledStudents: data.studentDocuments.length}));
+                    setStudentState(prev => ({...prev, initialStateStudents:data?.studentDocuments}));
+                    setStudentState((prev) => ({...prev , students:data?.studentDocuments,enrolledStudents: data?.studentDocuments?.length}));
                     
                     // SETTING LENGHT FOR BUTTONS!
-                    setPagination((prev) => ({...prev,numberOfButtons:Math.ceil(data.studentDocuments.length/5)})) 
+                    setPagination((prev) => ({...prev,numberOfButtons:Math.ceil(data?.studentDocuments?.length/5)})) 
                     // BUTTONS CREATOR! // AND CHECKS IF NUMBERS OF STUDENTS GREATER THAN 0
-                    setPagination((prev) => ({...prev,buttonsDisplayer: Array.from({ length:Math.ceil(data.studentDocuments.length/5)}, (_, index) => index + 1) })) 
+                    setPagination((prev) => ({...prev,buttonsDisplayer: Array.from({ length:Math.ceil(data.studentDocuments?.length/5)}, (_, index) => index + 1) })) 
                     
                     // FIRST INDEX!
                     setPagination((prev) => ({...prev, firstIndex: (pagination.currentPage-1)*5}));
-                    setPagination((prev) => ({...prev, lastIndex: (pagination.currentPage-1)*5+pagination.perPageList}))
-                    setPagination((prev) => ({...prev , paginatedData:data.studentDocuments.slice((pagination.currentPage-1)*5,(pagination.currentPage-1)*5+pagination.perPageList)}))
+                    setPagination((prev) => ({...prev, lastIndex: (pagination?.currentPage-1)*5+pagination?.perPageList}))
+                    setPagination((prev) => ({...prev , paginatedData:data?.studentDocuments?.slice((pagination.currentPage-1)*5,(pagination?.currentPage-1)*5+pagination?.perPageList)}))
                     
+// WILL CONVERT ALL THIS INTO ONE SETTER!
+
+
+
                     setPagination((prev) => ({...prev,loadingState:false}));
                     setStudentState((prev)=> ({...prev,loading:false}));
                  })
