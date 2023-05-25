@@ -2,12 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {mongooseConnect} from '@/libs/mongoose';
 import {StudentModel} from '@/models/Student';
-import fs from 'fs';
-import cloudinary from 'cloudinary'
-
-cloudinary.v2.config({
-    secure: true
-  });
 
  
 export default async function handler(req:NextApiRequest,res:NextApiResponse){
@@ -124,7 +118,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
         }).exec();
 
         // RESPONSE BACK!
-        res.json({success:true,gender , DOB , name , city , groups ,image,userId,studentID})
+        res.json({success:true})
         res.end();
     }
 

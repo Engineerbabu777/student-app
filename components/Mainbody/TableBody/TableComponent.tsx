@@ -27,7 +27,6 @@ const TableComponent = ({ind, stu, get}: Props) => {
 
     return(
         <>
-        {console.log(stu?._id)}
      <Tr fontWeight={'semibold'} fontSize={'10pt'} _hover={{ bg: 'green.200' }} key={ind}>
         <Td fontSize={{base:'0.65em',md:'10pt'}}>
             <Flex gap={4} alignItems={'center'}>
@@ -58,7 +57,7 @@ const TableComponent = ({ind, stu, get}: Props) => {
          { (stu?.groups.length === 1) && <>{stu?.groups[0]}</> }
 
          {/* IF LENGHT IS LESS THAN 2 THEN OK  OR IF LENGHT GREATER THAN 2 THEN SHOW and more*/}
-          { (stu?.groups?.length > 1) && (<>{((stu?.groups.length) as number === 2) ? (<>{stu?.groups[0]}, {stu?.groups?.[1]}</>):(<>{stu?.groups[0]}, {stu?.groups?.[1]} <Link href={'/'} className="text-orange-400">{(stu?.groups.length)-2} and more</Link></>)}</>)}
+          { (stu?.groups?.length > 1) && (<>{((stu?.groups.length) as number === 2) ? (<>{stu?.groups[0]}, {stu?.groups?.[1]}</>):(<>{stu?.groups[0]}, {stu?.groups?.[1]}<Link href={'/'} className="text-orange-400"> and {(stu?.groups.length)-2} more</Link></>)}</>)}
  
         </Td>
     </Tr>

@@ -119,15 +119,29 @@ const Form = ({ edit, create, handleCreate, handleEdit, setLoading, loading, typ
 
         };
 
+        // AGE VALIDATION!!
+        const ValidateDOB = (DOB:string) => {
+         // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+	  let optimizedBirthday = DOB.replace(/-/g, "/");
 
+	 //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+	  let myBirthday:any = new Date(optimizedBirthday) as any;
+          
+	 // calculate age comparing current date and borthday
+	  let myAge = ~~((Date.now() - myBirthday) / (31557600000));
+         
+          return myAge;
+        }
 
 
         const handleSubmit = () => {
                 setLoading(true);
 
+                 
                 // VALIDATE FIELDS! (WILL DO NEXT!)
                 if (!gender || !DOB || !name || !image || groups.length < 1 || !city) {
                         toast.error(' Form is not Completely Filled... !');
+                        toast.error('Fill the Form to Continue....')
                         setLoading(false);
                         return;
 
@@ -158,7 +172,15 @@ const Form = ({ edit, create, handleCreate, handleEdit, setLoading, loading, typ
                                 return; 
                         }
 
-                        // SEEMS PASSED ALL CASES NEXT UPLOAD!
+                        // Validate DOBQ!
+                        const age = ValidateDOB(DOB);
+                        if(age < 10) {
+                               toast.error('Invalid Age must be 10 years!');
+                               setLoading(false);
+                               return;
+                         }
+
+                        // SEEMS PASSED ALL CASES NEXT UPLOAD DETAILS!
 
                         // THEN CALL FUNCTION!
                         if (handleCreate) {

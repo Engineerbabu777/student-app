@@ -11,7 +11,7 @@ const TopRightBox = (props: Props) => {
     return (
         
         <Box display={{base:'none',md:'flex'}}>
-
+{/* Pagenation PART */}
         <Pagenation />
 
         </Box>
