@@ -70,7 +70,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse){
 
             const studentSearch = await StudentModel.find(toSearch,{name:1,gender:1,groups:1,image:1,DOB:1,city:1}).select("name gender groups city").limit(10);
            
-            res.status(200).json({sucess:true,studentSearch});
+            res.status(200).json({success:true,studentSearch});
             res.end();
         }
         

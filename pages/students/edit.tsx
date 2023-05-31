@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import Login from '@/components/Login';
+import Login from '@/components/LoginPage';
 
 interface Props {
 

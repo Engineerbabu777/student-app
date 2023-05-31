@@ -32,7 +32,7 @@ const MenuListItems = (props: Props) => {
           <Text fontWeight={'semibold'} ml={2}>Profile</Text>
           </MenuItem>
 
-          <MenuItem onClick={()=> {signOut();router.push('/')}} >
+          <MenuItem onClick={()=> {signOut(); router.push('/')}} >
 
           {/* LOGOUT-ICON */}
           <RiLogoutCircleRLine fontSize={18} color={'red.100'}/>

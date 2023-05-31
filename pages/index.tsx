@@ -1,6 +1,6 @@
 
 import { useSession, signIn, signOut } from "next-auth/react"
-import Login from '@/components/Login';
+import Login from '@/components/LoginPage';
 import Layout from '@/components/Layout';
 import Body from "@/components/Mainbody/Body";
 

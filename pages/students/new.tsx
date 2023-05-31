@@ -9,7 +9,7 @@ import axios from 'axios';
 import CheckBoxes from '@/components/New/CheckBoxes';
 import { toast } from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
-import Login from '@/components/Login';
+import Login from '@/components/LoginPage';
 import Form from '@/components/Form/Form';
 import {useRouter} from 'next/router';
 
